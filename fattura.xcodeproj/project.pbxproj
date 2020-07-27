@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ABB8F8F8B9379AC76A5E2050 /* Pods_fattura.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2E319F274B9B4249A20501F /* Pods_fattura.framework */; };
+		BFA5D3C19777EA73DB5CFDA5 /* Pods_fattura_fatturaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69D6C48D11A35E17194AC846 /* Pods_fattura_fatturaUITests.framework */; };
 		CC179D0D24CEF27E00D2FC7B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC179D0C24CEF27E00D2FC7B /* AppDelegate.swift */; };
 		CC179D0F24CEF27E00D2FC7B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC179D0E24CEF27E00D2FC7B /* ContentView.swift */; };
 		CC179D1224CEF27E00D2FC7B /* fattura.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CC179D1024CEF27E00D2FC7B /* fattura.xcdatamodeld */; };
@@ -15,6 +17,10 @@
 		CC179D1A24CEF27F00D2FC7B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC179D1824CEF27F00D2FC7B /* Main.storyboard */; };
 		CC179D2624CEF27F00D2FC7B /* fatturaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC179D2524CEF27F00D2FC7B /* fatturaTests.swift */; };
 		CC179D3124CEF27F00D2FC7B /* fatturaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC179D3024CEF27F00D2FC7B /* fatturaUITests.swift */; };
+		CC179D4024CEFDA200D2FC7B /* XMLTools in Frameworks */ = {isa = PBXBuildFile; productRef = CC179D3F24CEFDA200D2FC7B /* XMLTools */; };
+		CC179D4524CF1B9700D2FC7B /* models.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC179D4424CF1B9700D2FC7B /* models.swift */; };
+		CC179D4624CF1B9700D2FC7B /* models.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC179D4424CF1B9700D2FC7B /* models.swift */; };
+		E05CE9B8D3BECC95106C547D /* Pods_fatturaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 107BF89405780FCC0BCB3837 /* Pods_fatturaTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +41,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F3F8884C3F26272F2F1CA57 /* Pods-fattura-fatturaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fattura-fatturaUITests.debug.xcconfig"; path = "Target Support Files/Pods-fattura-fatturaUITests/Pods-fattura-fatturaUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		107BF89405780FCC0BCB3837 /* Pods_fatturaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fatturaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1CA199EC6F81B95BFEDB31A1 /* Pods-fattura-fatturaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fattura-fatturaUITests.release.xcconfig"; path = "Target Support Files/Pods-fattura-fatturaUITests/Pods-fattura-fatturaUITests.release.xcconfig"; sourceTree = "<group>"; };
+		2DE4A4FC3B08E89F20B54DF0 /* Pods-fatturaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fatturaTests.release.xcconfig"; path = "Target Support Files/Pods-fatturaTests/Pods-fatturaTests.release.xcconfig"; sourceTree = "<group>"; };
+		4DD907B9282CFDCBDBCDB712 /* Pods-fattura.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fattura.debug.xcconfig"; path = "Target Support Files/Pods-fattura/Pods-fattura.debug.xcconfig"; sourceTree = "<group>"; };
+		67864171AC5C60E0B1385431 /* Pods-fattura.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fattura.release.xcconfig"; path = "Target Support Files/Pods-fattura/Pods-fattura.release.xcconfig"; sourceTree = "<group>"; };
+		69D6C48D11A35E17194AC846 /* Pods_fattura_fatturaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fattura_fatturaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4AC8AC71DC65C8F7BD3466D /* Pods-fatturaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fatturaTests.debug.xcconfig"; path = "Target Support Files/Pods-fatturaTests/Pods-fatturaTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C2E319F274B9B4249A20501F /* Pods_fattura.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fattura.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC179D0924CEF27E00D2FC7B /* fattura.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fattura.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC179D0C24CEF27E00D2FC7B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CC179D0E24CEF27E00D2FC7B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -50,6 +65,7 @@
 		CC179D2C24CEF27F00D2FC7B /* fatturaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = fatturaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC179D3024CEF27F00D2FC7B /* fatturaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fatturaUITests.swift; sourceTree = "<group>"; };
 		CC179D3224CEF27F00D2FC7B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CC179D4424CF1B9700D2FC7B /* models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = models.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +73,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC179D4024CEFDA200D2FC7B /* XMLTools in Frameworks */,
+				ABB8F8F8B9379AC76A5E2050 /* Pods_fattura.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E05CE9B8D3BECC95106C547D /* Pods_fatturaTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,12 +90,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFA5D3C19777EA73DB5CFDA5 /* Pods_fattura_fatturaUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B124F6BAD9FCC30EF0784DD6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C2E319F274B9B4249A20501F /* Pods_fattura.framework */,
+				69D6C48D11A35E17194AC846 /* Pods_fattura_fatturaUITests.framework */,
+				107BF89405780FCC0BCB3837 /* Pods_fatturaTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C4470390545CC2FAB597CEA8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4DD907B9282CFDCBDBCDB712 /* Pods-fattura.debug.xcconfig */,
+				67864171AC5C60E0B1385431 /* Pods-fattura.release.xcconfig */,
+				0F3F8884C3F26272F2F1CA57 /* Pods-fattura-fatturaUITests.debug.xcconfig */,
+				1CA199EC6F81B95BFEDB31A1 /* Pods-fattura-fatturaUITests.release.xcconfig */,
+				A4AC8AC71DC65C8F7BD3466D /* Pods-fatturaTests.debug.xcconfig */,
+				2DE4A4FC3B08E89F20B54DF0 /* Pods-fatturaTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		CC179D0024CEF27E00D2FC7B = {
 			isa = PBXGroup;
 			children = (
@@ -84,6 +127,8 @@
 				CC179D2424CEF27F00D2FC7B /* fatturaTests */,
 				CC179D2F24CEF27F00D2FC7B /* fatturaUITests */,
 				CC179D0A24CEF27E00D2FC7B /* Products */,
+				C4470390545CC2FAB597CEA8 /* Pods */,
+				B124F6BAD9FCC30EF0784DD6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -108,6 +153,7 @@
 				CC179D1C24CEF27F00D2FC7B /* fattura.entitlements */,
 				CC179D1024CEF27E00D2FC7B /* fattura.xcdatamodeld */,
 				CC179D1524CEF27F00D2FC7B /* Preview Content */,
+				CC179D4424CF1B9700D2FC7B /* models.swift */,
 			);
 			path = fattura;
 			sourceTree = "<group>";
@@ -145,6 +191,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CC179D3524CEF27F00D2FC7B /* Build configuration list for PBXNativeTarget "fattura" */;
 			buildPhases = (
+				215DF02A17E52C75970893E7 /* [CP] Check Pods Manifest.lock */,
 				CC179D0524CEF27E00D2FC7B /* Sources */,
 				CC179D0624CEF27E00D2FC7B /* Frameworks */,
 				CC179D0724CEF27E00D2FC7B /* Resources */,
@@ -154,6 +201,9 @@
 			dependencies = (
 			);
 			name = fattura;
+			packageProductDependencies = (
+				CC179D3F24CEFDA200D2FC7B /* XMLTools */,
+			);
 			productName = fattura;
 			productReference = CC179D0924CEF27E00D2FC7B /* fattura.app */;
 			productType = "com.apple.product-type.application";
@@ -162,6 +212,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CC179D3824CEF27F00D2FC7B /* Build configuration list for PBXNativeTarget "fatturaTests" */;
 			buildPhases = (
+				07184A9B7651D59093E7493A /* [CP] Check Pods Manifest.lock */,
 				CC179D1D24CEF27F00D2FC7B /* Sources */,
 				CC179D1E24CEF27F00D2FC7B /* Frameworks */,
 				CC179D1F24CEF27F00D2FC7B /* Resources */,
@@ -180,6 +231,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CC179D3B24CEF27F00D2FC7B /* Build configuration list for PBXNativeTarget "fatturaUITests" */;
 			buildPhases = (
+				B108F5B2DC4F9EB7DA8EFA5B /* [CP] Check Pods Manifest.lock */,
 				CC179D2824CEF27F00D2FC7B /* Sources */,
 				CC179D2924CEF27F00D2FC7B /* Frameworks */,
 				CC179D2A24CEF27F00D2FC7B /* Resources */,
@@ -226,6 +278,9 @@
 				Base,
 			);
 			mainGroup = CC179D0024CEF27E00D2FC7B;
+			packageReferences = (
+				CC179D3E24CEFDA200D2FC7B /* XCRemoteSwiftPackageReference "SwiftXMLTools" */,
+			);
 			productRefGroup = CC179D0A24CEF27E00D2FC7B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -264,6 +319,75 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		07184A9B7651D59093E7493A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-fatturaTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		215DF02A17E52C75970893E7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-fattura-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B108F5B2DC4F9EB7DA8EFA5B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-fattura-fatturaUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CC179D0524CEF27E00D2FC7B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -272,6 +396,7 @@
 				CC179D0F24CEF27E00D2FC7B /* ContentView.swift in Sources */,
 				CC179D0D24CEF27E00D2FC7B /* AppDelegate.swift in Sources */,
 				CC179D1224CEF27E00D2FC7B /* fattura.xcdatamodeld in Sources */,
+				CC179D4524CF1B9700D2FC7B /* models.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +405,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC179D2624CEF27F00D2FC7B /* fatturaTests.swift in Sources */,
+				CC179D4624CF1B9700D2FC7B /* models.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,6 +559,7 @@
 		};
 		CC179D3624CEF27F00D2FC7B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4DD907B9282CFDCBDBCDB712 /* Pods-fattura.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = fattura/fattura.entitlements;
@@ -456,6 +583,7 @@
 		};
 		CC179D3724CEF27F00D2FC7B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 67864171AC5C60E0B1385431 /* Pods-fattura.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = fattura/fattura.entitlements;
@@ -479,6 +607,7 @@
 		};
 		CC179D3924CEF27F00D2FC7B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A4AC8AC71DC65C8F7BD3466D /* Pods-fatturaTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -501,6 +630,7 @@
 		};
 		CC179D3A24CEF27F00D2FC7B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2DE4A4FC3B08E89F20B54DF0 /* Pods-fatturaTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -523,6 +653,7 @@
 		};
 		CC179D3C24CEF27F00D2FC7B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0F3F8884C3F26272F2F1CA57 /* Pods-fattura-fatturaUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -543,6 +674,7 @@
 		};
 		CC179D3D24CEF27F00D2FC7B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1CA199EC6F81B95BFEDB31A1 /* Pods-fattura-fatturaUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -601,6 +733,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CC179D3E24CEFDA200D2FC7B /* XCRemoteSwiftPackageReference "SwiftXMLTools" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/spilikin/SwiftXMLTools.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.6.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CC179D3F24CEFDA200D2FC7B /* XMLTools */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CC179D3E24CEFDA200D2FC7B /* XCRemoteSwiftPackageReference "SwiftXMLTools" */;
+			productName = XMLTools;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		CC179D1024CEF27E00D2FC7B /* fattura.xcdatamodeld */ = {
