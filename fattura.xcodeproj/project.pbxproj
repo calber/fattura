@@ -17,9 +17,10 @@
 		CC179D1A24CEF27F00D2FC7B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC179D1824CEF27F00D2FC7B /* Main.storyboard */; };
 		CC179D2624CEF27F00D2FC7B /* fatturaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC179D2524CEF27F00D2FC7B /* fatturaTests.swift */; };
 		CC179D3124CEF27F00D2FC7B /* fatturaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC179D3024CEF27F00D2FC7B /* fatturaUITests.swift */; };
-		CC179D4024CEFDA200D2FC7B /* XMLTools in Frameworks */ = {isa = PBXBuildFile; productRef = CC179D3F24CEFDA200D2FC7B /* XMLTools */; };
 		CC179D4524CF1B9700D2FC7B /* models.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC179D4424CF1B9700D2FC7B /* models.swift */; };
 		CC179D4624CF1B9700D2FC7B /* models.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC179D4424CF1B9700D2FC7B /* models.swift */; };
+		CC179D8424D0212600D2FC7B /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = CC179D8324D0212600D2FC7B /* ArgumentParser */; };
+		CC179D8724D0419E00D2FC7B /* SWXMLHash in Frameworks */ = {isa = PBXBuildFile; productRef = CC179D8624D0419E00D2FC7B /* SWXMLHash */; };
 		E05CE9B8D3BECC95106C547D /* Pods_fatturaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 107BF89405780FCC0BCB3837 /* Pods_fatturaTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -73,7 +74,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC179D4024CEFDA200D2FC7B /* XMLTools in Frameworks */,
+				CC179D8724D0419E00D2FC7B /* SWXMLHash in Frameworks */,
+				CC179D8424D0212600D2FC7B /* ArgumentParser in Frameworks */,
 				ABB8F8F8B9379AC76A5E2050 /* Pods_fattura.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -202,7 +204,8 @@
 			);
 			name = fattura;
 			packageProductDependencies = (
-				CC179D3F24CEFDA200D2FC7B /* XMLTools */,
+				CC179D8324D0212600D2FC7B /* ArgumentParser */,
+				CC179D8624D0419E00D2FC7B /* SWXMLHash */,
 			);
 			productName = fattura;
 			productReference = CC179D0924CEF27E00D2FC7B /* fattura.app */;
@@ -279,7 +282,8 @@
 			);
 			mainGroup = CC179D0024CEF27E00D2FC7B;
 			packageReferences = (
-				CC179D3E24CEFDA200D2FC7B /* XCRemoteSwiftPackageReference "SwiftXMLTools" */,
+				CC179D8224D0212600D2FC7B /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
+				CC179D8524D0419E00D2FC7B /* XCRemoteSwiftPackageReference "SWXMLHash" */,
 			);
 			productRefGroup = CC179D0A24CEF27E00D2FC7B /* Products */;
 			projectDirPath = "";
@@ -735,21 +739,34 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		CC179D3E24CEFDA200D2FC7B /* XCRemoteSwiftPackageReference "SwiftXMLTools" */ = {
+		CC179D8224D0212600D2FC7B /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/spilikin/SwiftXMLTools.git";
+			repositoryURL = "https://github.com/apple/swift-argument-parser";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.6.1;
+				minimumVersion = 0.2.0;
+			};
+		};
+		CC179D8524D0419E00D2FC7B /* XCRemoteSwiftPackageReference "SWXMLHash" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/drmohundro/SWXMLHash.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		CC179D3F24CEFDA200D2FC7B /* XMLTools */ = {
+		CC179D8324D0212600D2FC7B /* ArgumentParser */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CC179D3E24CEFDA200D2FC7B /* XCRemoteSwiftPackageReference "SwiftXMLTools" */;
-			productName = XMLTools;
+			package = CC179D8224D0212600D2FC7B /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
+			productName = ArgumentParser;
+		};
+		CC179D8624D0419E00D2FC7B /* SWXMLHash */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CC179D8524D0419E00D2FC7B /* XCRemoteSwiftPackageReference "SWXMLHash" */;
+			productName = SWXMLHash;
 		};
 /* End XCSwiftPackageProductDependency section */
 

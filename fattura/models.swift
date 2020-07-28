@@ -27,6 +27,10 @@ struct Anagrafica {
     var denominazione: String
 }
 
+struct DatiGeneraliDocumento {
+    
+}
+
 struct DatiAnagrafici {
     var iva: IdFiscaleIVA
     var codiceFiscale: String = ""
