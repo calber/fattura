@@ -12,6 +12,8 @@ import XMLTools
 struct Fattura {
     var committente = DatiAnagrafici(iva: IdFiscaleIVA()) //CessionarioCommittente(anagrafica: DatiAnagrafici(iva: IdFiscaleIVA()))
     var prestatore = DatiAnagrafici(iva: IdFiscaleIVA(), sede: Sede())
+    var dati = DatiGeneraliDocumento()
+    var linee = [DettaglioLinee]()
 }
 
 
@@ -27,10 +29,6 @@ struct Anagrafica {
     var denominazione: String
 }
 
-struct DatiGeneraliDocumento {
-    
-}
-
 struct DatiAnagrafici {
     var iva: IdFiscaleIVA
     var codiceFiscale: String = ""
@@ -43,6 +41,33 @@ struct IdFiscaleIVA {
     var IdCodice: String = ""
 }
 
+struct DatiGeneraliDocumento {
+    var tipo: String = ""
+    var divisa: String = ""
+    var data: Date = Date()
+    var numero: String = ""
+    var totale: NSNumber = 0.0
+    var arrotondamento: NSNumber = 0.0
+    var causale: String = ""
+}
+
+struct DatiBeniServizi {
+    
+}
+
+struct DettaglioLinee: Identifiable {
+    var id: Int
+    var descrizione = ""
+    var prezzounitario: NSNumber = 0.0
+    var prezzototale: NSNumber = 0.0
+    var aliquotaiva: NSNumber = 0.0
+}
+
+struct DatiRiepilogo {
+    var aliquotaiva: NSNumber = 0.0
+    var imponibileimporto: NSNumber = 0.0
+}
+
 class FatturaBuilder {
     private var fattura: Fattura
     
@@ -50,19 +75,35 @@ class FatturaBuilder {
         fattura = Fattura()
     }
     
-    func committente(iva: String, paese: String, nome: String) -> FatturaBuilder {
+    @discardableResult func committente(iva: String, paese: String, nome: String) -> FatturaBuilder {
         fattura.committente.iva.IdCodice = iva
         fattura.committente.iva.IdPaese = paese
         fattura.committente.anagrafica.denominazione = nome
         return self
     }
     
-    func prestatore(iva: String, paese: String, sede: Sede, cfiscale: String, nome: String) -> FatturaBuilder {
+    @discardableResult func prestatore(iva: String, paese: String, sede: Sede, cfiscale: String, nome: String) -> FatturaBuilder {
         fattura.prestatore.iva.IdCodice = iva
         fattura.prestatore.iva.IdPaese = paese
         fattura.prestatore.codiceFiscale = cfiscale
         fattura.prestatore.anagrafica.denominazione = nome
         fattura.prestatore.sede = sede
+        return self
+    }
+    
+    @discardableResult func datiGenerali(tipo: String, divisa: String, data: Date, numero: String, totale: NSNumber, arrotondamento: NSNumber, causale: String) -> FatturaBuilder {
+        fattura.dati.tipo = tipo
+        fattura.dati.divisa = divisa
+        fattura.dati.data = data
+        fattura.dati.numero = numero
+        fattura.dati.totale = totale
+        fattura.dati.arrotondamento = arrotondamento
+        fattura.dati.causale = causale
+        return self
+    }
+    
+    @discardableResult func datiLinea(id: Int, descrizione: String, prezzounitario: NSNumber, prezzototale: NSNumber, aliquotaiva: NSNumber) -> FatturaBuilder {
+        fattura.linee.append(DettaglioLinee(id: id, descrizione: descrizione, prezzounitario: prezzounitario, prezzototale: prezzototale, aliquotaiva: aliquotaiva))
         return self
     }
 

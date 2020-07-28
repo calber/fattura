@@ -13,22 +13,30 @@ import ArgumentParser
 var fattura = Fattura()
 
 struct ContentView: View {
-    
+    let nf = NumberFormatter()
+
     init() {
         Command.main()
+        nf.numberStyle = .currency
     }
 
     var body: some View {
         VStack {
-            Spacer()
-            Text("Committente")
-            Text(fattura.committente.iva.IdCodice)
-            Text(fattura.committente.anagrafica.denominazione)
-            Spacer()
-            Text("Prestatore")
-            Text(fattura.prestatore.anagrafica.denominazione)
-            Text(fattura.prestatore.sede.indirizzo)
-            Spacer()
+            VStack {
+                Text("Committente")
+                Text(fattura.committente.iva.IdCodice)
+                Text(fattura.committente.anagrafica.denominazione)
+                Divider()
+                Text("Prestatore")
+                Text(fattura.prestatore.anagrafica.denominazione)
+                Text(fattura.prestatore.sede.indirizzo)
+                Divider()
+                Text(fattura.dati.tipo)
+                Text(nf.string(from: fattura.dati.totale) ?? "")
+            }
+            List(fattura.linee, id: \.id) { l in
+                Text("\(l.descrizione) \(l.prezzototale)")
+            }
         }.frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
@@ -81,25 +89,60 @@ class Reader {
     func read() -> Fattura {
         let builder = FatturaBuilder()
         
-        let c = xml["FatturaElettronica"]["FatturaElettronicaHeader"]["CessionarioCommittente"]["DatiAnagrafici"]
+        let cessionario = xml["FatturaElettronica"]["FatturaElettronicaHeader"]["CessionarioCommittente"]["DatiAnagrafici"]
         
-        builder.committente(iva: c["IdFiscaleIVA"]["IdCodice"].element?.text ?? "",
-                            paese: c["IdFiscaleIVA"]["IdPaese"].element?.text ?? "",
-                            nome: c["Anagrafica"]["Denominazione"].element?.text ?? "")
+        builder.committente(iva: cessionario["IdFiscaleIVA"]["IdCodice"].formatElement(),
+                            paese: cessionario["IdFiscaleIVA"]["IdPaese"].formatElement(),
+                            nome: cessionario["Anagrafica"]["Denominazione"].formatElement())
         
-        let p = xml["FatturaElettronica"]["FatturaElettronicaHeader"]["CedentePrestatore"]
+        let prestatore = xml["FatturaElettronica"]["FatturaElettronicaHeader"]["CedentePrestatore"]
         
-        builder.prestatore(iva: p["DatiAnagrafici"]["IdFiscaleIVA"]["IdCodice"].element?.text ?? "",
-                           paese: p["DatiAnagrafici"]["IdFiscaleIVA"]["IdPaese"].element?.text ?? "",
-                           sede: Sede(indirizzo: p["Sede"]["Indirizzo"].element?.text ?? "",
-                                      cap: p["Sede"]["CAP"].element?.text ?? "",
-                                      comune: p["Sede"]["Comune"].element?.text ?? "",
-                                      provincia: p["Sede"]["Provincia"].element?.text ?? "",
-                                      nazione: p["Sede"]["Nazione"].element?.text ?? ""),
-                           cfiscale: p["DatiAnagrafici"]["CodiceFiscale"].element?.text ?? "",
-                           nome: p["DatiAnagrafici"]["Anagrafica"]["Denominazione"].element?.text ?? "")
+        builder.prestatore(iva: prestatore["DatiAnagrafici"]["IdFiscaleIVA"]["IdCodice"].formatElement(),
+                           paese: prestatore["DatiAnagrafici"]["IdFiscaleIVA"]["IdPaese"].formatElement(),
+                           sede: Sede(indirizzo: prestatore["Sede"]["Indirizzo"].formatElement(),
+                                      cap: prestatore["Sede"]["CAP"].formatElement(),
+                                      comune: prestatore["Sede"]["Comune"].formatElement(),
+                                      provincia: prestatore["Sede"]["Provincia"].formatElement(),
+                                      nazione: prestatore["Sede"]["Nazione"].formatElement()),
+                           cfiscale: prestatore["DatiAnagrafici"]["CodiceFiscale"].formatElement(),
+                           nome: prestatore["DatiAnagrafici"]["Anagrafica"]["Denominazione"].formatElement())
+       
+        let generali = xml["FatturaElettronica"]["FatturaElettronicaBody"]["DatiGenerali"]["DatiGeneraliDocumento"]
         
+        builder.datiGenerali(tipo: generali["TipoDocumento"].formatElement(),
+                             divisa: "",
+                             data: Date(),
+                             numero: "",
+                             totale: generali["ImportoTotaleDocumento"].formatElement(),
+                             arrotondamento: 0.0,
+                             causale: "")
+        
+        let dettagli = xml["FatturaElettronica"]["FatturaElettronicaBody"]["DatiBeniServizi"]["DettaglioLinee"]
+        for item in dettagli.all {
+            builder.datiLinea(id: item["NumeroLinea"].formatElement(), descrizione: item["Descrizione"].formatElement(), prezzounitario: 0, prezzototale: item["PrezzoTotale"].formatElement(), aliquotaiva: 0)
+        }
+        
+
         return builder.build()
     }
 
+}
+
+extension XMLIndexer {
+    func formatElement() -> String {
+        return self.element?.text ?? ""
+    }
+    
+    func formatElement() -> Int {
+        return Int(self.element?.text ?? "") ?? 0
+    }
+
+    func formatElement() -> NSNumber {
+        let nf = NumberFormatter()
+        nf.numberStyle = .decimal
+        nf.maximumFractionDigits = 2
+        nf.roundingMode = .floor
+        nf.locale = Locale(identifier: "en")
+        return nf.number(from: self.element?.text ?? "0.0") ?? 0
+    }
 }
