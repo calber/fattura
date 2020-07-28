@@ -10,32 +10,41 @@ import SwiftUI
 import SWXMLHash
 import ArgumentParser
 
-var fattura = Fattura()
+//var fattura = Fattura()
 
 struct ContentView: View {
     let nf = NumberFormatter()
+    
+    @ObservedObject var viewModel: ViewModel
 
     init() {
-        Command.main()
+        //Command.main()
         nf.numberStyle = .currency
+        viewModel = ViewModel()
     }
 
     var body: some View {
-        VStack {
+        VStack(alignment: .leading, spacing: 10) {
             VStack {
-                Text("Committente")
-                Text(fattura.committente.iva.IdCodice)
-                Text(fattura.committente.anagrafica.denominazione)
+                Text("Committente").bold()
+                Text(viewModel.fattura!.committente.iva.IdCodice)
+                Text(viewModel.fattura!.committente.anagrafica.denominazione)
                 Divider()
-                Text("Prestatore")
-                Text(fattura.prestatore.anagrafica.denominazione)
-                Text(fattura.prestatore.sede.indirizzo)
+                Text("Prestatore").bold()
+                Text(viewModel.fattura!.prestatore.anagrafica.denominazione)
+                Text(viewModel.fattura!.prestatore.sede.indirizzo)
                 Divider()
-                Text(fattura.dati.tipo)
-                Text(nf.string(from: fattura.dati.totale) ?? "")
+                Text(viewModel.fattura!.dati.numero)
+                Text(nf.string(from: viewModel.fattura!.dati.totale) ?? "")
             }
-            List(fattura.linee, id: \.id) { l in
-                Text("\(l.descrizione) \(l.prezzototale)")
+            Button(action: {
+                try! self.viewModel.load(file: "test2.xml")
+            }) {
+                Text("load")
+            }.padding(.all, 10)
+            
+            List(viewModel.fattura!.linee, id: \.id) { l in
+                Text("\(l.descrizione) \(self.nf.string(from: l.prezzototale) ?? "")")
             }
         }.frame(maxWidth: .infinity, maxHeight: .infinity)
     }
@@ -53,96 +62,5 @@ struct RuntimeError: Error, CustomStringConvertible {
     
     init(_ description: String) {
         self.description = description
-    }
-}
-
-
-struct Command: ParsableCommand {
-    
-    @Flag(help: "provide a xml")
-    var xml = false
-
-    @Option(name: .customLong("NSDocumentRevisionsDebugMode",withSingleDash: true))
-    var nsdocumentrevisionsdebugmode = "YES"
-
-    @Argument(help: "Fattura Xml")
-    var file: String
-    
-    mutating func run() throws {
-        guard let input = try? String(contentsOfFile: file) else {
-            throw RuntimeError("Couldn't read from '\(file)'!")
-        }
-        fattura = Reader(data: input).read()
-    }
-}
-
-class Reader {
-    var xml: XMLIndexer
-    
-    init(data: String)  {
-        xml = SWXMLHash.config {
-            config in
-            config.shouldProcessNamespaces = true
-        }.parse(data)
-    }
-    
-    func read() -> Fattura {
-        let builder = FatturaBuilder()
-        
-        let cessionario = xml["FatturaElettronica"]["FatturaElettronicaHeader"]["CessionarioCommittente"]["DatiAnagrafici"]
-        
-        builder.committente(iva: cessionario["IdFiscaleIVA"]["IdCodice"].formatElement(),
-                            paese: cessionario["IdFiscaleIVA"]["IdPaese"].formatElement(),
-                            nome: cessionario["Anagrafica"]["Denominazione"].formatElement())
-        
-        let prestatore = xml["FatturaElettronica"]["FatturaElettronicaHeader"]["CedentePrestatore"]
-        
-        builder.prestatore(iva: prestatore["DatiAnagrafici"]["IdFiscaleIVA"]["IdCodice"].formatElement(),
-                           paese: prestatore["DatiAnagrafici"]["IdFiscaleIVA"]["IdPaese"].formatElement(),
-                           sede: Sede(indirizzo: prestatore["Sede"]["Indirizzo"].formatElement(),
-                                      cap: prestatore["Sede"]["CAP"].formatElement(),
-                                      comune: prestatore["Sede"]["Comune"].formatElement(),
-                                      provincia: prestatore["Sede"]["Provincia"].formatElement(),
-                                      nazione: prestatore["Sede"]["Nazione"].formatElement()),
-                           cfiscale: prestatore["DatiAnagrafici"]["CodiceFiscale"].formatElement(),
-                           nome: prestatore["DatiAnagrafici"]["Anagrafica"]["Denominazione"].formatElement())
-       
-        let generali = xml["FatturaElettronica"]["FatturaElettronicaBody"]["DatiGenerali"]["DatiGeneraliDocumento"]
-        
-        builder.datiGenerali(tipo: generali["TipoDocumento"].formatElement(),
-                             divisa: "",
-                             data: Date(),
-                             numero: "",
-                             totale: generali["ImportoTotaleDocumento"].formatElement(),
-                             arrotondamento: 0.0,
-                             causale: "")
-        
-        let dettagli = xml["FatturaElettronica"]["FatturaElettronicaBody"]["DatiBeniServizi"]["DettaglioLinee"]
-        for item in dettagli.all {
-            builder.datiLinea(id: item["NumeroLinea"].formatElement(), descrizione: item["Descrizione"].formatElement(), prezzounitario: 0, prezzototale: item["PrezzoTotale"].formatElement(), aliquotaiva: 0)
-        }
-        
-
-        return builder.build()
-    }
-
-}
-
-extension XMLIndexer {
-    func formatElement() -> String {
-        return self.element?.text ?? ""
-    }
-    
-    func formatElement() -> Int {
-        return Int(self.element?.text ?? "") ?? 0
-    }
-
-    func formatElement() -> NSNumber {
-        let nf = NumberFormatter()
-        nf.numberStyle = .decimal
-        nf.maximumFractionDigits = 2
-        nf.roundingMode = .floor
-        nf.locale = Locale(identifier: "en")
-        return nf.number(from: self.element?.text ?? "0.0") ?? 0
     }
 }

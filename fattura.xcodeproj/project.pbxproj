@@ -21,6 +21,7 @@
 		CC179D4624CF1B9700D2FC7B /* models.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC179D4424CF1B9700D2FC7B /* models.swift */; };
 		CC179D8424D0212600D2FC7B /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = CC179D8324D0212600D2FC7B /* ArgumentParser */; };
 		CC179D8724D0419E00D2FC7B /* SWXMLHash in Frameworks */ = {isa = PBXBuildFile; productRef = CC179D8624D0419E00D2FC7B /* SWXMLHash */; };
+		CC179D8924D077C500D2FC7B /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC179D8824D077C500D2FC7B /* ViewModel.swift */; };
 		E05CE9B8D3BECC95106C547D /* Pods_fatturaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 107BF89405780FCC0BCB3837 /* Pods_fatturaTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +68,7 @@
 		CC179D3024CEF27F00D2FC7B /* fatturaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fatturaUITests.swift; sourceTree = "<group>"; };
 		CC179D3224CEF27F00D2FC7B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC179D4424CF1B9700D2FC7B /* models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = models.swift; sourceTree = "<group>"; };
+		CC179D8824D077C500D2FC7B /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +158,7 @@
 				CC179D1024CEF27E00D2FC7B /* fattura.xcdatamodeld */,
 				CC179D1524CEF27F00D2FC7B /* Preview Content */,
 				CC179D4424CF1B9700D2FC7B /* models.swift */,
+				CC179D8824D077C500D2FC7B /* ViewModel.swift */,
 			);
 			path = fattura;
 			sourceTree = "<group>";
@@ -397,6 +400,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC179D8924D077C500D2FC7B /* ViewModel.swift in Sources */,
 				CC179D0F24CEF27E00D2FC7B /* ContentView.swift in Sources */,
 				CC179D0D24CEF27E00D2FC7B /* AppDelegate.swift in Sources */,
 				CC179D1224CEF27E00D2FC7B /* fattura.xcdatamodeld in Sources */,
