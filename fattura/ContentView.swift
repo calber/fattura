@@ -18,7 +18,6 @@ struct ContentView: View {
     @ObservedObject var viewModel: ViewModel
 
     init() {
-        //Command.main()
         nf.numberStyle = .currency
         viewModel = ViewModel()
     }
@@ -31,26 +30,68 @@ struct ContentView: View {
                 Text("load")
             }.padding(.all, 10)
 
-            VStack {
-                Text("Committente").bold()
-                Text(viewModel.fattura!.committente.iva.IdCodice)
-                Text(viewModel.fattura!.committente.anagrafica.denominazione)
-                Divider()
-                Text("Prestatore").bold()
-                Text(viewModel.fattura!.prestatore.anagrafica.denominazione)
-                Text(viewModel.fattura!.prestatore.sede.indirizzo)
-                Divider()
-                Text(viewModel.fattura!.dati.numero)
-                Text(nf.string(from: viewModel.fattura!.dati.totale) ?? "")
+            VStack(alignment: .leading) {
+                Group {
+                    Text("Committente").bold()
+                    Text(viewModel.fattura!.committente.iva.IdCodice)
+                    Text(viewModel.fattura!.committente.anagrafica.denominazione)
+                    Divider()
+                }
+                Group {
+                    Text("Prestatore").bold()
+                    Text(viewModel.fattura!.prestatore.anagrafica.denominazione)
+                    Text(viewModel.fattura!.prestatore.sede.indirizzo)
+                    Divider()
+                }
+                Group {
+                    Text("Dati fattura").bold()
+                    Text("numero \(viewModel.fattura!.dati.numero)")
+                    Text("totale \(nf.string(from: viewModel.fattura!.dati.totale) ?? "")")
+                }
             }
             
             List(viewModel.fattura!.linee, id: \.id) { l in
-                Text("\(l.descrizione) \(self.nf.string(from: l.prezzototale) ?? "")")
+                Dettaglio(dettaglio: l)
             }
-        }.frame(maxWidth: .infinity, maxHeight: .infinity)
+            if(!viewModel.fattura!.allegati.isEmpty) {
+                List(viewModel.fattura!.allegati, id: \.id) { l in
+                    Button(action: {
+                        self.viewModel.saveBase64StringToPDF(name: l.nome, base64String: l.attachment)
+                    }) {
+                        Text("save: \(l.nome)")
+                    }.padding(.all, 10)
+                }
+            }
+        }
+        .padding(.all, 20)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
+struct Dettaglio: View {
+    let currency = NumberFormatter()
+    let digit = NumberFormatter()
+    let percent = NumberFormatter()
+    var d: DettaglioLinee
+        
+    init(dettaglio: DettaglioLinee) {
+        d = dettaglio
+        currency.numberStyle = .currency
+        percent.numberStyle = .percent
+        percent.multiplier = 1.00
+    }
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text(d.descrizione)
+            HStack {
+                Text("quantità: \(self.digit.string(from: d.quantita) ?? "")")
+                Text(self.currency.string(from: d.prezzototale) ?? "")
+                Text(self.percent.string(from: d.aliquotaiva) ?? "")
+            }
+        }
+    }
+}
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

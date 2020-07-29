@@ -13,6 +13,7 @@ struct Fattura {
     var prestatore = DatiAnagrafici(iva: IdFiscaleIVA(), sede: Sede())
     var dati = DatiGeneraliDocumento()
     var linee = [DettaglioLinee]()
+    var allegati = [Allegato]()
 }
 
 
@@ -50,13 +51,19 @@ struct DatiGeneraliDocumento {
     var causale: String = ""
 }
 
-struct DatiBeniServizi {
-    
+struct CodiceArticolo {
+    var tipo: String = ""
+    var valore: String = ""
+}
+struct AltriDatiGestionali {
+    var tipo: String = ""
+    var testo: String = ""
 }
 
 struct DettaglioLinee: Identifiable {
     var id: Int
     var descrizione = ""
+    var quantita: NSNumber = 0
     var prezzounitario: NSNumber = 0.0
     var prezzototale: NSNumber = 0.0
     var aliquotaiva: NSNumber = 0.0
@@ -65,6 +72,14 @@ struct DettaglioLinee: Identifiable {
 struct DatiRiepilogo {
     var aliquotaiva: NSNumber = 0.0
     var imponibileimporto: NSNumber = 0.0
+}
+
+struct Allegato: Identifiable {
+    var id: Int
+    var nome = ""
+    var format = ""
+    var descrizione = ""
+    var attachment = ""
 }
 
 class FatturaBuilder {
@@ -101,8 +116,13 @@ class FatturaBuilder {
         return self
     }
     
-    @discardableResult func datiLinea(id: Int, descrizione: String, prezzounitario: NSNumber, prezzototale: NSNumber, aliquotaiva: NSNumber) -> FatturaBuilder {
-        fattura.linee.append(DettaglioLinee(id: id, descrizione: descrizione, prezzounitario: prezzounitario, prezzototale: prezzototale, aliquotaiva: aliquotaiva))
+    @discardableResult func allegati(allegato: Allegato) -> FatturaBuilder {
+        fattura.allegati.append(allegato)
+        return self
+    }
+
+    @discardableResult func datiLinea(dettaglio: DettaglioLinee) -> FatturaBuilder {
+        fattura.linee.append(dettaglio)
         return self
     }
 

@@ -67,16 +67,54 @@ class ViewModel: ObservableObject {
                              data: generali["Data"].formatAsDate(),
                              numero: generali["Numero"].formatElement(),
                              totale: generali["ImportoTotaleDocumento"].formatElement(),
-                             arrotondamento: 0.0,
+                             arrotondamento: generali["Arrotondamento"].formatElement(),
                              causale: "")
         
         let dettagli = xml["FatturaElettronica"]["FatturaElettronicaBody"]["DatiBeniServizi"]["DettaglioLinee"]
         for item in dettagli.all {
-            builder.datiLinea(id: item["NumeroLinea"].formatElement(), descrizione: item["Descrizione"].formatElement(), prezzounitario: 0, prezzototale: item["PrezzoTotale"].formatElement(), aliquotaiva: 0)
+            builder.datiLinea(
+                dettaglio: DettaglioLinee(
+                    id: item["NumeroLinea"].formatElement(),
+                    descrizione: item["Descrizione"].formatElement(),
+                    quantita: item["Quantita"].formatElement(),
+                    prezzounitario: item["PrezzoUnitario"].formatElement(),
+                    prezzototale: item["PrezzoTotale"].formatElement(),
+                    aliquotaiva: item["AliquotaIVA"].formatElement())
+            )
+        }
+        let allegati = xml["FatturaElettronica"]["FatturaElettronicaBody"]["Allegati"]
+        for (index, item) in allegati.all.enumerated() {
+            builder.allegati(allegato: Allegato(id: index,
+                                                nome: item["NomeAttachment"].formatElement(),
+                                                format: item["FormatoAttachment"].formatElement(),
+                                                descrizione: item["DescrizioneAttachment"].formatElement(),
+                                                attachment: item["Attachment"].formatElement()))
         }
         
         fattura = builder.build()
     }
+    
+    func saveBase64StringToPDF(name: String, base64String: String) {
+
+        guard
+            var documentsURL = (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)).last,
+            let convertedData = Data(base64Encoded: base64String)
+            else {
+            //handle error when getting documents URL
+            return
+        }
+
+        //name your file however you prefer
+        documentsURL.appendPathComponent(name)
+
+        do {
+            try convertedData.write(to: documentsURL)
+        } catch {
+        }
+
+        print(documentsURL)
+    }
+
 }
 
 private var inputXmlString: String = ""
