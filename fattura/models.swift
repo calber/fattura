@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import XMLTools
 
 struct Fattura {
     var committente = DatiAnagrafici(iva: IdFiscaleIVA()) //CessionarioCommittente(anagrafica: DatiAnagrafici(iva: IdFiscaleIVA()))

@@ -9,6 +9,7 @@
 import Foundation
 import SWXMLHash
 import ArgumentParser
+import Cocoa
 
 
 class ViewModel: ObservableObject {
@@ -20,11 +21,8 @@ class ViewModel: ObservableObject {
         read()
     }
     
-    func load(file: String) throws {
-        guard let input = try? String(contentsOfFile: file) else {
-            throw RuntimeError("Couldn't read from '\(file)'!")
-        }
-        inputXmlString = input
+    func load(file: String) {
+        inputXmlString = file
         read()
     }
     
@@ -37,6 +35,12 @@ class ViewModel: ObservableObject {
 
         let xml = xmlconfig.parse(inputXmlString)
         let builder = FatturaBuilder()
+        
+        guard xml["FatturaElettronica"].element?.attribute(by: "versione")?.text != nil else {
+            showAlert(title: "Error", body: "XML is not a FatturaElettronica")
+            fattura = builder.build()
+            return
+        }
         
         let cessionario = xml["FatturaElettronica"]["FatturaElettronicaHeader"]["CessionarioCommittente"]["DatiAnagrafici"]
         
@@ -71,7 +75,6 @@ class ViewModel: ObservableObject {
             builder.datiLinea(id: item["NumeroLinea"].formatElement(), descrizione: item["Descrizione"].formatElement(), prezzounitario: 0, prezzototale: item["PrezzoTotale"].formatElement(), aliquotaiva: 0)
         }
         
-        
         fattura = builder.build()
     }
 }
@@ -80,23 +83,56 @@ private var inputXmlString: String = ""
 
 struct CommandVm: ParsableCommand {
     
-    @Flag(help: "provide a xml")
-    var xml = false
-
     @Option(name: .customLong("NSDocumentRevisionsDebugMode",withSingleDash: true))
     var nsdocumentrevisionsdebugmode = "YES"
 
     @Argument(help: "Fattura Xml")
-    var file: String
+    var file: String = ""
     
-    mutating func run() throws {
+    mutating func run() {
+        
+        if(file.isEmpty) {
+            inputXmlString = showDialog()
+            return
+        }
         guard let input = try? String(contentsOfFile: file) else {
-            throw RuntimeError("Couldn't read from '\(file)'!")
+            inputXmlString = ""
+            return
         }
         inputXmlString = input
     }
+
 }
 
+func showDialog() -> String {
+    let dialog = NSOpenPanel();
+
+    dialog.title = "Choose an invoice";
+    dialog.allowedFileTypes = ["xml"];
+    dialog.showsResizeIndicator = true;
+    dialog.showsHiddenFiles = false;
+    dialog.allowsMultipleSelection = false;
+    dialog.canChooseDirectories = false;
+
+    if (dialog.runModal() ==  NSApplication.ModalResponse.OK) {
+        if let result = dialog.url {
+            do {
+                return try String(contentsOfFile: result.path)
+            } catch {
+                showAlert(title: "Errore", body: "selected file is not readable")
+            }
+        }
+    }
+    return ""
+}
+
+func showAlert(title: String, body: String) {
+    let alert = NSAlert()
+    alert.alertStyle = NSAlert.Style.warning
+    alert.messageText = title
+    alert.informativeText = body
+    alert.runModal()
+}
 
 extension XMLIndexer {
     func formatAsDate() -> Date {

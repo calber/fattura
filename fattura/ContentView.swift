@@ -25,6 +25,12 @@ struct ContentView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
+            Button(action: {
+                self.viewModel.load(file: showDialog())
+            }) {
+                Text("load")
+            }.padding(.all, 10)
+
             VStack {
                 Text("Committente").bold()
                 Text(viewModel.fattura!.committente.iva.IdCodice)
@@ -37,11 +43,6 @@ struct ContentView: View {
                 Text(viewModel.fattura!.dati.numero)
                 Text(nf.string(from: viewModel.fattura!.dati.totale) ?? "")
             }
-            Button(action: {
-                try! self.viewModel.load(file: "test2.xml")
-            }) {
-                Text("load")
-            }.padding(.all, 10)
             
             List(viewModel.fattura!.linee, id: \.id) { l in
                 Text("\(l.descrizione) \(self.nf.string(from: l.prezzototale) ?? "")")
