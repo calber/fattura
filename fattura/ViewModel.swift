@@ -95,7 +95,6 @@ class ViewModel: ObservableObject {
     }
     
     func saveBase64StringToPDF(name: String, base64String: String) {
-
         guard
             var documentsURL = (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)).last,
             let convertedData = Data(base64Encoded: base64String)
@@ -103,13 +102,11 @@ class ViewModel: ObservableObject {
             //handle error when getting documents URL
             return
         }
-
-        //name your file however you prefer
         documentsURL.appendPathComponent(name)
-
         do {
             try convertedData.write(to: documentsURL)
         } catch {
+            showAlert(title: "Error", body: "Cannot save pdf")
         }
 
         print(documentsURL)
